@@ -22,13 +22,15 @@ public class SampleRoute extends RouteBuilder {
 	public void configure() throws Exception {
 		/*fileComponent();*/
 		/*fileMove();*/
-		amqComponent();
+		/*amqComponent();*/
 		/*localAmq();
 */		/*amqLocal();
 		dynamicRoute();*/
 		/*split();
 		multiCast();*/
 		/*aggregator();*/
+		amqToIbmmq();
+		/*sftp();*/
 	}
 	private void fileComponent() {
 		// file component
@@ -102,8 +104,6 @@ public class SampleRoute extends RouteBuilder {
 				.to("activemq:queue:multicast2")
 				.id("Multicast Demo")
 				.end();
-		aggregator();
-	
 }
 	private void aggregator() {
 		//Aggregator
@@ -112,5 +112,18 @@ public class SampleRoute extends RouteBuilder {
 		.process("processordy")
 		.end()
 		.log("${body}");
-	}
+}
+private void amqToIbmmq() {
+	//Amq to Ibmq
+	
+	from("activemq:queue:amq")
+	.log("after amq")
+	.to("ibmmq:queue:Test.sample1");
+}
+private void sftp() {
+	 //sftp
+	from("sftp:aegon@35.246.5.162:2222/ftphome/input?password=P455w0rd&delete=true")
+	.to("file:C:/Users/a857206/Documents/Test/sftp")
+	.log("successfully transfered file");
+}
 }
