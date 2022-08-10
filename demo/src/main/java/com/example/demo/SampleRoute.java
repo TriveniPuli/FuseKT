@@ -17,7 +17,8 @@ public class SampleRoute extends RouteBuilder {
 	 ProcessDy processorDy;
 	private AggregationStrategy aggregationStrategy;
 
-	/*This is clonned change*/
+	/*This is clonned change-jibin*/
+	/*changes are done-triveni*/
 	@Override
 	public void configure() throws Exception {
 		/*fileComponent();*/
